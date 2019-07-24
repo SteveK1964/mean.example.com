@@ -1,0 +1,2 @@
+git add .gitignore
+git commit -m 'Ignore node_modules from future commits' .gitignore
