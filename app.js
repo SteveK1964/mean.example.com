@@ -8,7 +8,7 @@ var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var config = require('./config.dev');
 var mongoose = require('mongoose');
-
+var apiUsersRouter = require('./routes/api/users');
 var app = express();//Connect to MongoDB
 mongoose.connect(config.mongodb, { useNewUrlParser: true });
 
@@ -29,7 +29,7 @@ app.use('/users', usersRouter);
 app.use(function(req, res, next) {
   next(createError(404));
 });
-
+app.use('/api/users', apiUsersRouter);
 // error handler
 app.use(function(err, req, res, next) {
   // set locals, only providing error in development
