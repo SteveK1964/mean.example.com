@@ -52,6 +52,21 @@ app.use('/api/users', apiUsersRouter);
 app.use(function(req, res, next) {
   next(createError(404));
 });
+
+passport.serializeUser(function(user, done){
+  done(null,{
+    id: user._id,
+    username: user.username,
+    email: user.email,
+    first_name: user.first_name,
+    last_name: user.last_name
+  });
+});
+
+passport.deserializeUser(function(user, done){
+  done(null, user);
+});
+
 // error handler
 app.use(function(err, req, res, next) {
   // set locals, only providing error in development
