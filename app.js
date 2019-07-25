@@ -14,6 +14,7 @@ var session = require('express-session');
 var MongoStore = require('connect-mongo')(session);
 var passport = require('passport');
 var apiUsersRouter = require('./routes/api/users');
+var apiAuthRouter = require('./routes/api/auth');
 var app = express();
 
 // view engine setup
@@ -49,6 +50,7 @@ app.use(passport.session());
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/api/users', apiUsersRouter);
+app.use('/api/auth', apiAuthRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
@@ -82,6 +84,7 @@ app.use(function(err, req, res, next) {
   res.render('error');
 });
 
-module.exports = app;
 //Connect to MongoDB
 mongoose.connect(config.mongodb, { useNewUrlParser: true });
+
+module.exports = app;
